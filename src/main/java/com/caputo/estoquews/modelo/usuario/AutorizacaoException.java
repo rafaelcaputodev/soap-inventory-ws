@@ -1,6 +1,7 @@
 package com.caputo.estoquews.modelo.usuario;
 
 import javax.xml.ws.WebFault;
+import java.util.Date;
 
 @WebFault(name = "AutorizacaoFault")
 public class AutorizacaoException extends Exception{
@@ -9,7 +10,7 @@ public class AutorizacaoException extends Exception{
         super(message);
     }
 
-    public String getFaultInfo(){
-        return "Token invalido";
+    public InfoFault getFaultInfo() {
+        return new InfoFault(new Date(), "Token invalido");
     }
 }

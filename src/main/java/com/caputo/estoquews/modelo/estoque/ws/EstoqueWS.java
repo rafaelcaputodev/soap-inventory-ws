@@ -2,17 +2,17 @@ package com.caputo.estoquews.modelo.estoque.ws;
 
 import com.caputo.estoquews.modelo.item.*;
 import com.caputo.estoquews.modelo.usuario.AutorizacaoException;
+import com.caputo.estoquews.modelo.usuario.InfoFault;
 import com.caputo.estoquews.modelo.usuario.TokenDao;
 import com.caputo.estoquews.modelo.usuario.TokenUsuario;
-import com.caputo.estoquews.modelo.usuario.Usuario;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
+import java.util.Date;
 import java.util.List;
 
 @WebService
@@ -43,6 +43,8 @@ public class EstoqueWS {
         if(!valido){
             throw new AutorizacaoException("Autorizacao falhou");
         }
+
+        new ItemValidador(item).validate();
 
         this.dao.cadastrar(item);
 
